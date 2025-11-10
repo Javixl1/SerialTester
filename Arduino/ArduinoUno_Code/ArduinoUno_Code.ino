@@ -6,11 +6,12 @@ void setup() {
   for (int i = 1; i <= 4; i++) {
     pinMode(pinBase + i, OUTPUT);  // Configura pines 11 a 13
   }
+  Serial.setTimeout(1000);  // por ejemplo, 10 ms
 }
 
 void loop() {
   if (Serial.available()) {
-    input = Serial.readStringUntil('\n');
+    input = Serial.readStringUntil('\r');
     input.trim();  // Elimina espacios y saltos de línea
 
     // Verifica si el formato es tipo "qX=Y"
@@ -29,8 +30,10 @@ void loop() {
       } else {
         Serial.println("ERROR");
       }
-    } else {
-      handleSCPI(input);
+    } 
+    
+     else {
+      //handleSCPI(input);
     }
   }
 }
